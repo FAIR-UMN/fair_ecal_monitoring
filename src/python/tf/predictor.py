@@ -1,35 +1,24 @@
 #!/usr/bin/env python3
 
 import os
-#os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
-import argparse
-import pickle
+#os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices' # enable gpu utilization
 
-import numpy as np
 import pandas as pd
-import math
+import numpy as np
 
-from src.data_processor import lstm_data_processor
+from src.python.tf.data_processor import lstm_data_processor
 
 # import tf packages
-from tensorflow.keras.layers import Input
-from tensorflow.keras.models import Model
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.layers import LSTM
 from tensorflow.keras.models import load_model
 
 # import scikit-related packages
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 
-# import matplotlib
-import matplotlib.pyplot as plt
-from matplotlib.patches import Patch
-from matplotlib.colors import to_rgb, to_rgba
+import pickle
 
-# matplotlib style settings
-plt.style.use('{}/default.style'.format(os.environ['STYLEPATH']))
+# import matplotlib
+from src.utils.pltutils import plt 
 
 class predictor():
      
@@ -105,7 +94,6 @@ class predictor():
        # instantaneous predictions
        arr = self.model.predict(self.train_x)[:,0]
        arr = np.concatenate((self.train_x[0,:,0], arr))
-       print(arr)
        return arr
     
    def plot_predictions_vs_target(self, pred_type='iterative', path_to_output=''):
@@ -122,7 +110,6 @@ class predictor():
         
         target_ = np.concatenate((self.train_x[0,:,0].flatten(), self.train_y))
         
-        print(len(prediction_sequence), len(target_))
         # inverse transform the predictions
         pred_size = len(prediction_sequence)
 
@@ -149,11 +136,6 @@ class predictor():
         ymin = min(iter_prediction_df[:,0])
         plt.xlim(pd.to_datetime(self.timestamps[0]), pd.to_datetime(self.timestamps[-1]))
         plt.ylim(0.7, ymax)
-        cms = plt.text(x=pd.to_datetime(self.timestamps[0]), y=ymax, s="CMS $\it{Preliminary}$",
-            fontsize=18, fontweight='bold',
-            fontfamily='sans-serif',
-            horizontalalignment='left', 
-            verticalalignment='bottom')
         plt.legend(loc='upper right', fontsize=14)
         plt.savefig(path_to_output+'/predictions_vs_target.png')
         

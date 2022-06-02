@@ -72,8 +72,9 @@ target/
 # Spyder
 .spyproject/
 
-# Jupyter NB Checkpoints
+# Jupyter Settings/NB Checkpoints
 .ipynb_checkpoints/
+jupyterhub*
 
 # exclude data from source control by default
 data
