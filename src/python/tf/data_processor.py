@@ -81,7 +81,6 @@ class lstm_data_processor:
         #---------------------------------------------------------------------------------------------------
 
         input_file = path_to_input+'/df_skimmed_xtal_{}_{}.csv'.format(self.xtal_id, self.year)
-
         xtal_array = pd.read_csv(input_file)
         xtal_array = xtal_array[xtal_array['calibration']>0.5]
 
