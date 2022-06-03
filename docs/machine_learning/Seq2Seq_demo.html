@@ -1,0 +1,1772 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Use Seq2Seq Model to Predict the Calibrations &#8212; FAIR-UMN-ECAL</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Machine Learning Solutions" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/FAIR4HEP_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">FAIR-UMN-ECAL</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project_description.html">
+   Project Description
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../dataset/index.html">
+   Datasets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../dataset/description.html">
+     Description
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference external" href="https://github.com/FAIR-UMN/fair_ecal_monitoring/blob/master/metadata.json">
+     Download
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference external" href="https://github.com/FAIR-UMN/fair_ecal_monitoring/blob/master/metadata.json">
+     Metadata
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../install.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Machine Learning Solutions
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference external" href="https://github.com/FAIR-UMN/FAIR-UMN-ECAL/blob/main/slides/ECAL_2022.pdf">
+     ECAL Seq2Seq Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference external" href="https://github.com/FAIR-UMN/FAIR-UMN-ECAL/blob/main/slides/ECAL_2022.pdf">
+     ECAL LSTM
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Use Seq2Seq Model to Predict the Calibrations
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/machine_learning/Seq2Seq_demo.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/FAIR-UMN/FAIR-UMN-ECAL"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/FAIR-UMN/FAIR-UMN-ECAL/issues/new?title=Issue%20on%20page%20%2Fmachine_learning/Seq2Seq_demo.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Settings:">
+   Settings:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Two-Cases:">
+   Two Cases:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Main:">
+   Main:
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Import-packages/classes.">
+     Import packages/classes.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Set-up-the-hyper-parameters.">
+     Set up the hyper-parameters.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Create-folders-to-keep-the-results">
+     Create folders to keep the results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Visualize-the-datasets-(only-show-the-calibration-curve).">
+     Visualize the datasets (only show the calibration curve).
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Create-Seq2Seq-model-including-an-EncoderNet-and-a-DecoderNet">
+     Create Seq2Seq model including an EncoderNet and a DecoderNet
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Training-Seq2Seq-model">
+     Training Seq2Seq model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Save-trained-models">
+     Save trained models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Case1-Prediction:-do-not-use-predictions-as-input-to-help-the-next-round-prediction">
+     Case1 Prediction: do not use predictions as input to help the next-round prediction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Case2-Prediction:-use-predictions-as-input-to-help-the-next-round-prediction.">
+     Case2 Prediction: use predictions as input to help the next-round prediction.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Test-on-other-crystals">
+     Test on other crystals
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#Case1-Prediction:-do-not-use-prediction-as-input-to-help-the-next-round-prediction">
+       Case1 Prediction: do not use prediction as input to help the next-round prediction
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Case2 Prediction: use predictions as input to help the next-round prediction.
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Use-Seq2Seq-Model-to-Predict-the-Calibrations">
+<h1>Use Seq2Seq Model to Predict the Calibrations<a class="headerlink" href="#Use-Seq2Seq-Model-to-Predict-the-Calibrations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Settings:">
+<h2>Settings:<a class="headerlink" href="#Settings:" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Input</strong>: the previous calibrations and luminosity;</p></li>
+<li><p><strong>Output</strong>: the future calibrations;</p></li>
+<li><p><strong>Training data</strong>: the data collected from the crystal 54,000 in the year of 2016.</p></li>
+</ul>
+</div>
+<div class="section" id="Two-Cases:">
+<h2>Two Cases:<a class="headerlink" href="#Two-Cases:" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Case1</strong>: We <strong>do not</strong> reuse the predicted values. For example, we <strong>do not</strong> use the predicted values at <em>t</em> to predict the <em>t+1</em> values.</p></li>
+<li><p><strong>Case2</strong>: We <strong>do</strong> reuse the predicted values. For example, we <strong>do</strong> use the predicted values at <em>t</em> to predict the <em>t+1</em> values.</p></li>
+</ol>
+</div>
+<div class="section" id="Main:">
+<h2>Main:<a class="headerlink" href="#Main:" title="Permalink to this headline">¶</a></h2>
+<p>This is the main function/entry for our Seq2Seq model.</p>
+<div class="section" id="Import-packages/classes.">
+<h3>Import packages/classes.<a class="headerlink" href="#Import-packages/classes." title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>seq2seq_model</strong> defines the model;</p></li>
+<li><p><strong>seq2seq_train</strong> defines the training procedures;</p></li>
+<li><p><strong>seq2seq_prediction</strong> defines the prediction procedures;</p></li>
+<li><p><strong>ecal_dataset_prep</strong> defines the data preprocessing procedures.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#------ import packages ------#</span>
+<span class="kn">from</span> <span class="nn">seq2seq_model</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">seq2seq_train</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">seq2seq_prediction</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">ecal_dataset_prep</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Set-up-the-hyper-parameters.">
+<h3>Set up the hyper-parameters.<a class="headerlink" href="#Set-up-the-hyper-parameters." title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>input_len</strong>: the time steps (sequence length) for input data;</p></li>
+<li><p><strong>output_len</strong>: the time steps (sequence length) for output data;</p></li>
+<li><p><strong>stride</strong>: the stide of the sequence/window (default: output_len);</p></li>
+<li><p><strong>learning_rate</strong>: the learning rate for our model;</p></li>
+<li><p><strong>n_epochs</strong>: the maximum epoch to train our model;</p></li>
+<li><p><strong>print_step</strong>: we print the training information per “print_step” epoch;</p></li>
+<li><p><strong>batch_size</strong>: the batch size to train our model;</p></li>
+<li><p><strong>opt_alg</strong>: the name of the optimization function (one should select one from {adam’, ‘sgd’});</p></li>
+<li><p><strong>train_strategy</strong>: different training strategies (one should select one from {‘recursive’, ‘teacher_forcing’, ‘mixed’});</p></li>
+<li><p><strong>teacher_forcing_ratio</strong>: it is a float number in the range of 0-1; it will be ignored when train_strategy=‘recursive’;</p></li>
+<li><p><strong>hidden_size</strong>: the number of features in the hidden state;</p></li>
+<li><p><strong>num_layers</strong>: the number of recurrent layers;</p></li>
+<li><p><strong>gpu_id</strong>: the gpu id;</p></li>
+<li><p><strong>train_file</strong>: the training csv file;</p></li>
+<li><p><strong>val_file</strong>: the validation csv file;</p></li>
+<li><p><strong>test_file</strong>: the test csv file;</p></li>
+<li><p><strong>crystal_id</strong>: the crystal’s id;</p></li>
+<li><p><strong>verbose</strong>:set it to be True if print information is desired; otherwise, set it to False; default (False).</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">input_len</span> <span class="o">=</span> <span class="mi">24</span>
+<span class="n">output_len</span> <span class="o">=</span> <span class="mi">24</span>
+<span class="n">stride</span> <span class="o">=</span> <span class="n">output_len</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">print_step</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="k">if</span> <span class="n">output_len</span><span class="o">&gt;=</span><span class="mi">48</span><span class="p">:</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">opt_alg</span> <span class="o">=</span> <span class="s1">&#39;adam&#39;</span>
+<span class="n">train_strategy</span> <span class="o">=</span> <span class="s1">&#39;recursive&#39;</span> <span class="c1">#&quot;Please select one of them---[recursive, teacher_forcing, mixed]!&quot;</span>
+<span class="n">teacher_forcing_ratio</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># please set it in the range of [0,1]</span>
+<span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">num_layers</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">gpu_id</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">crystal_id</span> <span class="o">=</span> <span class="mi">54000</span>
+<span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">train_file_2016</span> <span class="o">=</span> <span class="s1">&#39;../0_Dataset/interim/df_skimmed_xtal_</span><span class="si">{}</span><span class="s1">_2016.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">crystal_id</span><span class="p">)</span>
+<span class="n">test_file_2017</span> <span class="o">=</span> <span class="s1">&#39;../0_Dataset/interim/df_skimmed_xtal_</span><span class="si">{}</span><span class="s1">_2017.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">crystal_id</span><span class="p">)</span>
+<span class="n">test_file_2018</span> <span class="o">=</span> <span class="s1">&#39;../0_Dataset/interim/df_skimmed_xtal_</span><span class="si">{}</span><span class="s1">_2018.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">crystal_id</span><span class="p">)</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gpu_id</span><span class="p">)</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Create-folders-to-keep-the-results">
+<h3>Create folders to keep the results<a class="headerlink" href="#Create-folders-to-keep-the-results" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># folder to save figures</span>
+<span class="n">save_dir_vis_data</span> <span class="o">=</span> <span class="s1">&#39;LSTM_</span><span class="si">{}</span><span class="s1">_IW_</span><span class="si">{}</span><span class="s1">_OW_</span><span class="si">{}</span><span class="s1">_LR_</span><span class="si">{}</span><span class="s1">_ID_</span><span class="si">{}</span><span class="s1">/vis_data/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">input_len</span><span class="p">,</span> <span class="n">output_len</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span><span class="n">crystal_id</span><span class="p">)</span>
+
+<span class="c1"># folder to save models</span>
+<span class="n">save_dir_models</span> <span class="o">=</span> <span class="s1">&#39;LSTM_</span><span class="si">{}</span><span class="s1">_IW_</span><span class="si">{}</span><span class="s1">_OW_</span><span class="si">{}</span><span class="s1">_LR_</span><span class="si">{}</span><span class="s1">_ID_</span><span class="si">{}</span><span class="s1">/models/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">input_len</span><span class="p">,</span> <span class="n">output_len</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span><span class="n">crystal_id</span><span class="p">)</span>
+
+<span class="c1"># folders for case1</span>
+<span class="n">save_dir_case1_fig</span><span class="o">=</span> <span class="s1">&#39;LSTM_</span><span class="si">{}</span><span class="s1">_IW_</span><span class="si">{}</span><span class="s1">_OW_</span><span class="si">{}</span><span class="s1">_LR_</span><span class="si">{}</span><span class="s1">_ID_</span><span class="si">{}</span><span class="s1">/case1_fig/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">input_len</span><span class="p">,</span> <span class="n">output_len</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span><span class="n">crystal_id</span><span class="p">)</span>
+<span class="n">save_dir_case1_csv</span><span class="o">=</span> <span class="s1">&#39;LSTM_</span><span class="si">{}</span><span class="s1">_IW_</span><span class="si">{}</span><span class="s1">_OW_</span><span class="si">{}</span><span class="s1">_LR_</span><span class="si">{}</span><span class="s1">_ID_</span><span class="si">{}</span><span class="s1">/case1_csv/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">input_len</span><span class="p">,</span> <span class="n">output_len</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span><span class="n">crystal_id</span><span class="p">)</span>
+
+<span class="c1"># folders for case2</span>
+<span class="n">save_dir_case2_fig</span><span class="o">=</span> <span class="s1">&#39;LSTM_</span><span class="si">{}</span><span class="s1">_IW_</span><span class="si">{}</span><span class="s1">_OW_</span><span class="si">{}</span><span class="s1">_LR_</span><span class="si">{}</span><span class="s1">_ID_</span><span class="si">{}</span><span class="s1">/case2_fig/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">input_len</span><span class="p">,</span> <span class="n">output_len</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span><span class="n">crystal_id</span><span class="p">)</span>
+<span class="n">save_dir_case2_csv</span><span class="o">=</span> <span class="s1">&#39;LSTM_</span><span class="si">{}</span><span class="s1">_IW_</span><span class="si">{}</span><span class="s1">_OW_</span><span class="si">{}</span><span class="s1">_LR_</span><span class="si">{}</span><span class="s1">_ID_</span><span class="si">{}</span><span class="s1">/case2_csv/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">input_len</span><span class="p">,</span> <span class="n">output_len</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span><span class="n">crystal_id</span><span class="p">)</span>
+
+<span class="n">dir_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="n">save_dir_case2_fig</span><span class="p">,</span> <span class="n">save_dir_case2_csv</span><span class="p">,</span><span class="n">save_dir_models</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">cur_dir</span> <span class="ow">in</span> <span class="n">dir_list</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt; </span><span class="si">{}</span><span class="s1"> has been created successfully!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt; </span><span class="si">{}</span><span class="s1"> is exist!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54000/vis_data/ is exist!
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54000/case1_fig/ is exist!
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54000/case1_csv/ is exist!
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54000/case2_fig/ is exist!
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54000/case2_csv/ is exist!
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54000/models/ is exist!
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Visualize-the-datasets-(only-show-the-calibration-curve).">
+<h3>Visualize the datasets (only show the calibration curve).<a class="headerlink" href="#Visualize-the-datasets-(only-show-the-calibration-curve)." title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># for train_file_2016</span>
+<span class="n">fig_name_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2016_cali_original.png&#39;</span><span class="p">)</span>
+<span class="n">fig_name_scaled_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2016_cali_scaled.png&#39;</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_train_2016</span> <span class="o">=</span> <span class="n">ECAL_Dataset_Prep</span><span class="p">(</span><span class="n">train_file_2016</span><span class="p">,</span>
+                                                 <span class="n">input_len</span><span class="p">,</span>
+                                                 <span class="n">output_len</span><span class="p">,</span>
+                                                 <span class="n">stride</span><span class="p">,</span>
+                                                 <span class="n">fig_name_cali</span><span class="p">,</span>
+                                                 <span class="n">fig_name_scaled_cali</span><span class="p">,</span>
+                                                 <span class="n">verbose</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_train_2016</span><span class="o">.</span><span class="n">start_processing</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_8_0.png" src="../_images/machine_learning_Seq2Seq_demo_8_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_8_1.png" src="../_images/machine_learning_Seq2Seq_demo_8_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># for test_file_2017</span>
+<span class="n">fig_name_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2017_cali_original.png&#39;</span><span class="p">)</span>
+<span class="n">fig_name_scaled_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2017_cali_scaled.png&#39;</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_test_2017</span> <span class="o">=</span> <span class="n">ECAL_Dataset_Prep</span><span class="p">(</span><span class="n">test_file_2017</span><span class="p">,</span>
+                                                 <span class="n">input_len</span><span class="p">,</span>
+                                                 <span class="n">output_len</span><span class="p">,</span>
+                                                 <span class="n">stride</span><span class="p">,</span>
+                                                 <span class="n">fig_name_cali</span><span class="p">,</span>
+                                                 <span class="n">fig_name_scaled_cali</span><span class="p">,</span>
+                                                 <span class="n">verbose</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">start_processing</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_9_0.png" src="../_images/machine_learning_Seq2Seq_demo_9_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_9_1.png" src="../_images/machine_learning_Seq2Seq_demo_9_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># for test_file_2018</span>
+<span class="n">fig_name_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2018_cali_original.png&#39;</span><span class="p">)</span>
+<span class="n">fig_name_scaled_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2018_cali_scaled.png&#39;</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_test_2018</span> <span class="o">=</span> <span class="n">ECAL_Dataset_Prep</span><span class="p">(</span><span class="n">test_file_2018</span><span class="p">,</span>
+                                                 <span class="n">input_len</span><span class="p">,</span>
+                                                 <span class="n">output_len</span><span class="p">,</span>
+                                                 <span class="n">stride</span><span class="p">,</span>
+                                                 <span class="n">fig_name_cali</span><span class="p">,</span>
+                                                 <span class="n">fig_name_scaled_cali</span><span class="p">,</span>
+                                                 <span class="n">verbose</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">start_processing</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_10_0.png" src="../_images/machine_learning_Seq2Seq_demo_10_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_10_1.png" src="../_images/machine_learning_Seq2Seq_demo_10_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Create-Seq2Seq-model-including-an-EncoderNet-and-a-DecoderNet">
+<h3>Create Seq2Seq model including an EncoderNet and a DecoderNet<a class="headerlink" href="#Create-Seq2Seq-model-including-an-EncoderNet-and-a-DecoderNet" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X_train</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_train_2016</span><span class="o">.</span><span class="n">torch_X</span>
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_train_2016</span><span class="o">.</span><span class="n">torch_Y</span>
+<span class="n">lstm_encoder</span> <span class="o">=</span> <span class="n">LSTM_Encoder</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">)</span>
+<span class="n">lstm_decoder</span> <span class="o">=</span> <span class="n">LSTM_Decoder</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="n">Y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">)</span>
+<span class="n">lstm_encoder</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">lstm_decoder</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lstm_decoder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+LSTM_Encoder(
+  (lstm): LSTM(2, 1024, num_layers=2)
+)
+LSTM_Decoder(
+  (lstm): LSTM(2, 1024, num_layers=2)
+  (linear): Linear(in_features=1024, out_features=1, bias=True)
+)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Training-Seq2Seq-model">
+<h3>Training Seq2Seq model<a class="headerlink" href="#Training-Seq2Seq-model" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">loss_figure_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;0_loss.png&#39;</span><span class="p">)</span>
+<span class="n">target_len</span> <span class="o">=</span> <span class="n">output_len</span>
+<span class="n">seq2sqe_train</span> <span class="o">=</span> <span class="n">Seq2Seq_Train</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                              <span class="n">lstm_decoder</span><span class="p">,</span>
+                              <span class="n">X_train</span><span class="p">,</span>
+                              <span class="n">Y_train</span><span class="p">,</span>
+                              <span class="n">n_epochs</span><span class="p">,</span>
+                              <span class="n">target_len</span><span class="p">,</span>
+                              <span class="n">batch_size</span><span class="p">,</span>
+                              <span class="n">learning_rate</span><span class="p">,</span>
+                              <span class="n">opt_alg</span><span class="p">,</span>
+                              <span class="n">print_step</span><span class="p">,</span>
+                              <span class="n">train_strategy</span><span class="p">,</span>
+                              <span class="n">teacher_forcing_ratio</span><span class="p">,</span>
+                              <span class="n">device</span><span class="p">,</span>
+                              <span class="n">loss_figure_name</span><span class="p">)</span>
+<span class="n">seq2sqe_train</span><span class="o">.</span><span class="n">start_train</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Start training... (be patient: training time varies)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_14_1.png" src="../_images/machine_learning_Seq2Seq_demo_14_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish training!
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Save-trained-models">
+<h3>Save trained models<a class="headerlink" href="#Save-trained-models" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span> <span class="c1">#after training, we also want to save our models</span>
+<span class="n">model_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_models</span><span class="p">,</span> <span class="s1">&#39;lstm_encoder.pt&#39;</span><span class="p">)</span>
+<span class="n">save_model</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="o">.</span><span class="n">eval</span><span class="p">(),</span> <span class="n">model_file_name</span><span class="p">)</span>
+<span class="n">model_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_models</span><span class="p">,</span> <span class="s1">&#39;lstm_decoder.pt&#39;</span><span class="p">)</span>
+<span class="n">save_model</span><span class="p">(</span><span class="n">lstm_decoder</span><span class="o">.</span><span class="n">eval</span><span class="p">(),</span> <span class="n">model_file_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The trained model has been saved!
+The trained model has been saved!
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Case1-Prediction:-do-not-use-predictions-as-input-to-help-the-next-round-prediction">
+<h3>Case1 Prediction: do not use predictions as input to help the next-round prediction<a class="headerlink" href="#Case1-Prediction:-do-not-use-predictions-as-input-to-help-the-next-round-prediction" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on training data</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_train_2016</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_train_2016</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_train_2016</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_train_2016</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2016&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case1&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case1 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_18_1.png" src="../_images/machine_learning_Seq2Seq_demo_18_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on test data-2017</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2017&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case1&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case1 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_19_1.png" src="../_images/machine_learning_Seq2Seq_demo_19_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on test data-2018</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2018&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case1&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case1 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_20_1.png" src="../_images/machine_learning_Seq2Seq_demo_20_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Case2-Prediction:-use-predictions-as-input-to-help-the-next-round-prediction.">
+<h3>Case2 Prediction: use predictions as input to help the next-round prediction.<a class="headerlink" href="#Case2-Prediction:-use-predictions-as-input-to-help-the-next-round-prediction." title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on training data</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_train_2016</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_train_2016</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_train_2016</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_train_2016</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2016&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case2&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case2 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_22_1.png" src="../_images/machine_learning_Seq2Seq_demo_22_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on test data-2017</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2017&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case2&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case2 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_23_1.png" src="../_images/machine_learning_Seq2Seq_demo_23_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on test data-2018</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2018&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case2&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case2 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_24_1.png" src="../_images/machine_learning_Seq2Seq_demo_24_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Test-on-other-crystals">
+<h3>Test on other crystals<a class="headerlink" href="#Test-on-other-crystals" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">crystal_id</span> <span class="o">=</span> <span class="mi">54001</span>
+<span class="n">test_file_2016</span> <span class="o">=</span> <span class="s1">&#39;../0_Dataset/interim/df_skimmed_xtal_</span><span class="si">{}</span><span class="s1">_2016.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">crystal_id</span><span class="p">)</span>
+<span class="n">test_file_2017</span> <span class="o">=</span> <span class="s1">&#39;../0_Dataset/interim/df_skimmed_xtal_</span><span class="si">{}</span><span class="s1">_2017.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">crystal_id</span><span class="p">)</span>
+<span class="n">test_file_2018</span> <span class="o">=</span> <span class="s1">&#39;../0_Dataset/interim/df_skimmed_xtal_</span><span class="si">{}</span><span class="s1">_2018.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">crystal_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+
+<span></span><span class="c1"># folders for case1</span>
+<span class="n">save_dir_case1_fig</span><span class="o">=</span> <span class="s1">&#39;LSTM_</span><span class="si">{}</span><span class="s1">_IW_</span><span class="si">{}</span><span class="s1">_OW_</span><span class="si">{}</span><span class="s1">_LR_</span><span class="si">{}</span><span class="s1">_ID_</span><span class="si">{}</span><span class="s1">/case1_fig/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">input_len</span><span class="p">,</span> <span class="n">output_len</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span><span class="n">crystal_id</span><span class="p">)</span>
+<span class="n">save_dir_case1_csv</span><span class="o">=</span> <span class="s1">&#39;LSTM_</span><span class="si">{}</span><span class="s1">_IW_</span><span class="si">{}</span><span class="s1">_OW_</span><span class="si">{}</span><span class="s1">_LR_</span><span class="si">{}</span><span class="s1">_ID_</span><span class="si">{}</span><span class="s1">/case1_csv/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">input_len</span><span class="p">,</span> <span class="n">output_len</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span><span class="n">crystal_id</span><span class="p">)</span>
+
+<span class="c1"># folders for case2</span>
+<span class="n">save_dir_case2_fig</span><span class="o">=</span> <span class="s1">&#39;LSTM_</span><span class="si">{}</span><span class="s1">_IW_</span><span class="si">{}</span><span class="s1">_OW_</span><span class="si">{}</span><span class="s1">_LR_</span><span class="si">{}</span><span class="s1">_ID_</span><span class="si">{}</span><span class="s1">/case2_fig/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">input_len</span><span class="p">,</span> <span class="n">output_len</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span><span class="n">crystal_id</span><span class="p">)</span>
+<span class="n">save_dir_case2_csv</span><span class="o">=</span> <span class="s1">&#39;LSTM_</span><span class="si">{}</span><span class="s1">_IW_</span><span class="si">{}</span><span class="s1">_OW_</span><span class="si">{}</span><span class="s1">_LR_</span><span class="si">{}</span><span class="s1">_ID_</span><span class="si">{}</span><span class="s1">/case2_csv/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">input_len</span><span class="p">,</span> <span class="n">output_len</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span><span class="n">crystal_id</span><span class="p">)</span>
+
+<span class="n">dir_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="n">save_dir_case2_fig</span><span class="p">,</span> <span class="n">save_dir_case2_csv</span><span class="p">,</span><span class="n">save_dir_models</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">cur_dir</span> <span class="ow">in</span> <span class="n">dir_list</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt; </span><span class="si">{}</span><span class="s1"> has been created successfully!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt; </span><span class="si">{}</span><span class="s1"> is exist!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54000/vis_data/ is exist!
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54001/case1_fig/ is exist!
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54001/case1_csv/ is exist!
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54001/case2_fig/ is exist!
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54001/case2_csv/ is exist!
+&gt;&gt;&gt; LSTM_1024_IW_24_OW_24_LR_0.001_ID_54000/models/ is exist!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># for test_file_2016</span>
+<span class="n">fig_name_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2016_cali_original.png&#39;</span><span class="p">)</span>
+<span class="n">fig_name_scaled_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2016_cali_scaled.png&#39;</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_test_2016</span> <span class="o">=</span> <span class="n">ECAL_Dataset_Prep</span><span class="p">(</span><span class="n">test_file_2016</span><span class="p">,</span>
+                                                 <span class="n">input_len</span><span class="p">,</span>
+                                                 <span class="n">output_len</span><span class="p">,</span>
+                                                 <span class="n">stride</span><span class="p">,</span>
+                                                 <span class="n">fig_name_cali</span><span class="p">,</span>
+                                                 <span class="n">fig_name_scaled_cali</span><span class="p">,</span>
+                                                 <span class="n">verbose</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_test_2016</span><span class="o">.</span><span class="n">start_processing</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_28_0.png" src="../_images/machine_learning_Seq2Seq_demo_28_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_28_1.png" src="../_images/machine_learning_Seq2Seq_demo_28_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># for test_file_2017</span>
+<span class="n">fig_name_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2017_cali_original.png&#39;</span><span class="p">)</span>
+<span class="n">fig_name_scaled_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2017_cali_scaled.png&#39;</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_test_2017</span> <span class="o">=</span> <span class="n">ECAL_Dataset_Prep</span><span class="p">(</span><span class="n">test_file_2017</span><span class="p">,</span>
+                                                 <span class="n">input_len</span><span class="p">,</span>
+                                                 <span class="n">output_len</span><span class="p">,</span>
+                                                 <span class="n">stride</span><span class="p">,</span>
+                                                 <span class="n">fig_name_cali</span><span class="p">,</span>
+                                                 <span class="n">fig_name_scaled_cali</span><span class="p">,</span>
+                                                 <span class="n">verbose</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">start_processing</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_29_0.png" src="../_images/machine_learning_Seq2Seq_demo_29_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_29_1.png" src="../_images/machine_learning_Seq2Seq_demo_29_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># for test_file_2018</span>
+<span class="n">fig_name_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2018_cali_original.png&#39;</span><span class="p">)</span>
+<span class="n">fig_name_scaled_cali</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_vis_data</span><span class="p">,</span> <span class="s1">&#39;2018_cali_scaled.png&#39;</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_test_2018</span> <span class="o">=</span> <span class="n">ECAL_Dataset_Prep</span><span class="p">(</span><span class="n">test_file_2018</span><span class="p">,</span>
+                                                 <span class="n">input_len</span><span class="p">,</span>
+                                                 <span class="n">output_len</span><span class="p">,</span>
+                                                 <span class="n">stride</span><span class="p">,</span>
+                                                 <span class="n">fig_name_cali</span><span class="p">,</span>
+                                                 <span class="n">fig_name_scaled_cali</span><span class="p">,</span>
+                                                 <span class="n">verbose</span><span class="p">)</span>
+<span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">start_processing</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_30_0.png" src="../_images/machine_learning_Seq2Seq_demo_30_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_30_1.png" src="../_images/machine_learning_Seq2Seq_demo_30_1.png" />
+</div>
+</div>
+<div class="section" id="Case1-Prediction:-do-not-use-prediction-as-input-to-help-the-next-round-prediction">
+<h4>Case1 Prediction: do not use prediction as input to help the next-round prediction<a class="headerlink" href="#Case1-Prediction:-do-not-use-prediction-as-input-to-help-the-next-round-prediction" title="Permalink to this headline">¶</a></h4>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on test data</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2016</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2016</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2016</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2016</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2016&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case1&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case1 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_32_1.png" src="../_images/machine_learning_Seq2Seq_demo_32_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on test data-2017</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2017&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case1&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case1 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_33_1.png" src="../_images/machine_learning_Seq2Seq_demo_33_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on test data-2018</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2018&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case1&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case1 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_34_1.png" src="../_images/machine_learning_Seq2Seq_demo_34_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h4>Case2 Prediction: use predictions as input to help the next-round prediction.<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on test data</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2016</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2016</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2016</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2016</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2016&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case2&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case2 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_36_1.png" src="../_images/machine_learning_Seq2Seq_demo_36_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on test data-2017</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2017&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case2&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case2 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_37_1.png" src="../_images/machine_learning_Seq2Seq_demo_37_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># check its prediction on test data-2018</span>
+<span class="c1"># Please note that here, the data are in the numpy format, not the tensor format</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">np_X</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">np_Y</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2018</span><span class="o">.</span><span class="n">df_lumi</span>
+<span class="n">scaler_cali</span> <span class="o">=</span> <span class="n">ecal_dataset_prep_test_2017</span><span class="o">.</span><span class="n">scaler_cali</span>
+<span class="n">year</span> <span class="o">=</span> <span class="s1">&#39;2018&#39;</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s1">&#39;case2&#39;</span>
+<span class="n">fig_name_mape</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;0_MAPE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">fig_name_mse</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_fig</span><span class="p">,</span> <span class="s1">&#39;1_MSE_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">metric_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir_case1_csv</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span><span class="n">year</span><span class="p">))</span>
+<span class="n">seq2seq_prediction</span> <span class="o">=</span> <span class="n">Seq2Seq_Prediction</span><span class="p">(</span><span class="n">lstm_encoder</span><span class="p">,</span>
+                                        <span class="n">lstm_decoder</span><span class="p">,</span>
+                                        <span class="n">Xtrain</span><span class="p">,</span>
+                                        <span class="n">Ytrain</span><span class="p">,</span>
+                                        <span class="n">df</span><span class="p">,</span>
+                                        <span class="n">scaler_cali</span><span class="p">,</span>
+                                        <span class="n">device</span><span class="p">,</span>
+                                        <span class="n">fig_name_mape</span><span class="p">,</span>
+                                        <span class="n">fig_name_mse</span><span class="p">,</span>
+                                        <span class="n">metric_file</span><span class="p">,</span>
+                                        <span class="n">test_case</span><span class="p">)</span>
+<span class="n">seq2seq_prediction</span><span class="o">.</span><span class="n">start_prediction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt;  case2 : start prediction...(be patient)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/machine_learning_Seq2Seq_demo_38_1.png" src="../_images/machine_learning_Seq2Seq_demo_38_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt;&gt; Finish prediction!
+</pre></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="index.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Machine Learning Solutions</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By FAIR-UMN<br/>
+        
+            &copy; Copyright 2022, FAIR-UMN.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
