@@ -20,7 +20,7 @@ import pickle
 # import matplotlib
 from src.utils.pltutils import plt 
 
-class predictor():
+class lstm_predictor():
      
    def __init__(self, xtal_id_, year_, period_):
         
