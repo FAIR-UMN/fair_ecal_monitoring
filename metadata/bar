@@ -1,0 +1,6 @@
+for i in {1..13}; do
+   python3 -m json.tool metadata_plus_z_$i.json foo
+   mv foo metadata_plus_z_$i.json
+   python3 -m json.tool metadata_minus_z_$i.json foo
+   mv foo metadata_minus_z_$i.json
+done
